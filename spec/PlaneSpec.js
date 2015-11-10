@@ -11,4 +11,9 @@ describe("Plane", function() {
     expect(plane.isLanded()).toEqual(true);
   });
 
+  it ("should be able to take off", function() {
+  	plane.takeOff();
+  	expect(plane.isLanded()).toEqual(false);
+  });
+
 });
