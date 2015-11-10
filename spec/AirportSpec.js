@@ -36,8 +36,26 @@ describe("Airport", function() {
   it('Should not allow a plane to land when the airport is full', function() {
     for (var i = 0; i < capacity; i++) {
        airport.land(plane);
-     }; 
+     }
      expect(function(){airport.land(plane);}).toThrow(Error('Airport is full'));
   });
+
+  it("Should return tell us when the weather", function() {
+    expect(airport.weather()).toBeTruthy();
+  });
+  it("Should return tell us when the weather is stormy", function() {
+    spyOn(Math, 'random').andReturn(0.0);
+    expect(airport.isStormy()).toBe(true);
+  });
+  it("should't allow a plane to take off when it's stormy", function() {
+    spyOn(Math, 'random').andReturn(0.0);
+    expect(function(){airport.takeOff(plane);}).toThrow(Error("Can't take off. Stormy"));
+  });
+  it("should allow a plane to take off when it's sunny", function() {
+    spyOn(Math, 'random').andReturn(0.9);
+    airport.takeOff(plane);
+    expect(airplane.hasPlane(plane)).toBe(false);
+  });
+
 });
 
